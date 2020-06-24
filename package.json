@@ -1,0 +1,28 @@
+{
+  "name": "bulma-vue",
+  "description": "Lightweight Vue 3 designed Bulma components",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Rinat Taysin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evilandfox/bulma-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evilandfox/bulma-vue/issues"
+  },
+  "scripts": {
+    "docs:dev": "vite",
+    "docs:build": "vite build",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "bulma": "^0.9.0",
+    "vue": "^3.0.0-beta.15",
+    "vue-router": "^4.0.0-alpha.13"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.0-beta.15",
+    "vite": "^1.0.0-beta.4"
+  }
+}

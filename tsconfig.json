@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2020", "dom", "dom.iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "/@lib/": ["lib/"],
+      "/@docs/*": ["docs/*"]
+    }
+  },
+  "include": ["lib", "docs"]
+}
