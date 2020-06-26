@@ -1,5 +1,5 @@
 <template>
-  <b-box>Hello, world!</b-box>
+  <p>WIP</p>
 </template>
 
 <script lang="ts">

@@ -1,4 +1,4 @@
-import {FunctionalComponent, h, PropType, Slot} from 'vue'
+import {FunctionalComponent, h, PropType, cloneVNode} from 'vue'
 import {BColor, BGridSize, BSizeUpper, resolveCssClasses} from './helpers'
 
 /** https://bulma.io/documentation/layout/footer/ */
@@ -29,17 +29,25 @@ BContainer.props = {
 
 /** https://bulma.io/documentation/layout/level/ */
 
-export const BLevel: FunctionalComponent = function (_props, ctx) {
-  return h('div', {class: 'level'}, [
-    ctx.slots.left &&
-      h('div', {class: 'level-left'}, wrapLevelItems(ctx.slots.left)),
-    ctx.slots.default && wrapLevelItems(ctx.slots.default),
-    ctx.slots.right &&
-      h('div', {class: 'level-right'}, wrapLevelItems(ctx.slots.right))
+export const BLevel: FunctionalComponent<{mobile?: boolean}> = function (
+  cssProps,
+  ctx
+) {
+  return h('div', {class: resolveCssClasses('level', cssProps)}, [
+    ctx.slots.left && h('div', {class: 'level-left'}, ctx.slots.left()),
+    ctx.slots.default && ctx.slots.default(),
+    ctx.slots.right && h('div', {class: 'level-right'}, ctx.slots.right())
   ])
 }
-const wrapLevelItems = (slot: Slot) =>
-  slot().map((node) => h('div', {class: 'level-item'}, node))
+export const BLevelItem: FunctionalComponent<{tag: string}> = function (
+  props,
+  ctx
+) {
+  return h(props.tag, {class: 'level-item'}, ctx.slots.default!())
+}
+BLevelItem.props = {
+  tag: {type: String, default: 'div'}
+}
 
 /** https://bulma.io/documentation/layout/media-object/ */
 
@@ -68,19 +76,22 @@ BSection.props = {size: String as PropType<BSizeUpper>}
 /** https://bulma.io/documentation/layout/tiles/ */
 
 export const BTile: FunctionalComponent<{
+  tag: string
   ancestor?: boolean
   parent?: boolean
   child?: boolean
   vertical?: boolean
   size?: BGridSize
-}> = function (cssProps, ctx) {
-  return h(
-    'div',
-    {class: resolveCssClasses('tile', cssProps)},
-    ctx.slots.default!()
-  )
+}> = function ({tag, ...cssProps}, ctx) {
+  const cssClasses = resolveCssClasses('tile', cssProps)
+  const children = ctx.slots.default!()
+  if (cssProps.child) {
+    return children.map((child) => cloneVNode(child, {class: cssClasses}))
+  }
+  return h(tag, {class: cssClasses}, children)
 }
 BTile.props = {
+  tag: {type: String, default: 'div'},
   ancestor: Boolean,
   parent: Boolean,
   child: Boolean,

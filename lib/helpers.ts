@@ -98,3 +98,6 @@ export const resolveCssClasses = (
   }
   return result
 }
+
+export const range = <T>(from: number, to: number, mapper: (i: number) => T) =>
+  Array.from({length: to - from + 1}, (_, i) => mapper(from + i))
