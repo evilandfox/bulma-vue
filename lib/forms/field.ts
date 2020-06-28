@@ -6,17 +6,20 @@ export const BField: FunctionalComponent<{
   size?: BSize
   label?: string
   help?: string
-}> = function (props, ctx) {
-  const labelContents = ctx.slots.label ? ctx.slots.label() : props.label
+}> = function ({label: propLabel, help: propHelp, color, size}, ctx) {
+  const labelContents = ctx.slots.label ? ctx.slots.label() : propLabel
   const labelBlock =
-    labelContents && h('label', {class: 'label'}, labelContents)
+    labelContents &&
+    h('label', {class: ['label', size && `is-${size}`]}, labelContents)
 
-  const helpContents = ctx.slots.help ? ctx.slots.help() : props.help
-  const helpBlock = helpContents && h('p', {class: 'help'}, helpContents)
+  const helpContents = ctx.slots.help ? ctx.slots.help() : propHelp
+  const helpBlock =
+    helpContents &&
+    h('p', {class: ['help', color && `is-${color}`]}, helpContents)
 
   return h('div', {class: 'field'}, [
     labelBlock,
-    ctx.slots.default?.({}),
+    ctx.slots.default?.({color, size}),
     helpBlock
   ])
 }

@@ -17,6 +17,13 @@ export const router = createRouter({
       component: () => import('./pages/Columns.vue')
     },
 
+    // forms
+    {
+      name: 'forms-general',
+      path: '/forms/general',
+      component: () => import('./pages/Forms.vue')
+    },
+
     // layout
     {
       name: 'container',

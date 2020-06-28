@@ -10,6 +10,9 @@
             <b-menu-group label="Columns">
               <route-menu-link name="columns">Columns</route-menu-link>
             </b-menu-group>
+            <b-menu-group label="Forms">
+              <route-menu-link name="forms-general">General</route-menu-link>
+            </b-menu-group>
             <b-menu-group label="Layout">
               <route-menu-link name="container">Container</route-menu-link>
               <route-menu-link name="level">Level</route-menu-link>

@@ -36,3 +36,35 @@ BRadioItem.props = {
   value: {type: String, required: true},
   disabled: Boolean
 }
+
+export const BRadio: FunctionalComponent<{
+  modelValue: string
+}> = function (props, ctx) {
+  console.log(ctx.slots)
+  return h(
+    'div',
+    {class: 'control'},
+    Object.entries(ctx.slots)
+      .filter(([_, slot]) => typeof slot === 'function')
+      .map(([value, slot]) =>
+        h(
+          'label',
+          {
+            class: 'radio'
+          },
+          [
+            withDirectives(
+              h('input', {
+                'type': 'radio',
+                'value': value,
+                'onUpdate:modelValue': (value: string) =>
+                  ctx.emit('update:modelValue', value)
+              }),
+              [[vModelRadio, props.modelValue]]
+            ),
+            slot!()
+          ]
+        )
+      )
+  )
+}
