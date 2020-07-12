@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
+import Intro from './pages/getStarted/Intro.vue'
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -7,7 +8,7 @@ export const router = createRouter({
     {
       name: 'intro',
       path: '/intro',
-      component: () => import('./pages/getStarted/Intro.vue')
+      component: Intro
     },
 
     // columns

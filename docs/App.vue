@@ -34,7 +34,12 @@
           </b-menu>
         </b-column>
         <b-column>
-          <router-view />
+          <Suspense>
+            <router-view />
+            <template #fallback>
+              <p>Loading...</p>
+            </template>
+          </Suspense>
         </b-column>
       </b-columns>
     </b-container>

@@ -1,12 +1,16 @@
 <template>
-  <p>WIP</p>
+  <p>{{ result }}</p>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, Suspense} from 'vue'
 import {BBox} from '/@lib/'
 
 export default defineComponent({
-  components: {BBox}
+  components: {BBox, Suspense},
+  async setup() {
+    await new Promise((resolve) => setTimeout(resolve, 800))
+    return {result: 'WIP'}
+  }
 })
 </script>
